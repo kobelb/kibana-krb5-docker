@@ -32,7 +32,6 @@ LOGDIR=/var/log/krb5
 MARKER_FILE=/etc/marker
 
 # Pull environment information
-REALM_NAME=$(cat $ENVPROP_FILE | grep realm= | cut -d '=' -f 2)
 KDC_NAME=$(cat $ENVPROP_FILE | grep kdc= | cut -d '=' -f 2)
 BUILD_ZONE=$(cat $ENVPROP_FILE | grep zone= | cut -d '=' -f 2)
 ELASTIC_ZONE=$(echo $BUILD_ZONE | cut -d '.' -f 1,2)
@@ -89,10 +88,6 @@ cat << EOF > /etc/krb5kdc/kadm5.acl
 */admin@$REALM_NAME	*
 */*@$REALM_NAME		i
 EOF
-
-# Create admin principal
-kadmin.local -q "addprinc -pw elastic admin/admin@$REALM_NAME"
-kadmin.local -q "ktadd -k /etc/admin.keytab admin/admin@$REALM_NAME"
 
 # Create a link so addprinc.sh is on path
 ln -s $PROV_DIR/addprinc.sh /usr/bin/
