@@ -6,7 +6,8 @@ RUN bash /src/main/resources/provision/installkdc.sh
 
 RUN kadmin.local -q "addprinc -pw changeme HTTP/es@$REALM_NAME" && \
 kadmin.local -q "ktadd -k /root/es.keytab HTTP/es@$REALM_NAME" && \
-kadmin.local -q "addprinc -pw changeme dev@$REALM_NAME"
+kadmin.local -q "addprinc -pw changeme dev@$REALM_NAME" && \
+kadmin.local -q "ktadd -k /root/dev.keytab dev@$REALM_NAME"
 
 EXPOSE 88
 EXPOSE 88/udp
