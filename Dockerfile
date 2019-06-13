@@ -4,8 +4,8 @@ ADD src /src
 RUN echo kerberos.test.elastic.co > /etc/hostname && echo "127.0.0.1 kerberos.test.elastic.co" >> /etc/hosts
 RUN bash /src/main/resources/provision/installkdc.sh
 
-RUN kadmin.local -q "addprinc -pw changeme HTTP/es@$REALM_NAME" && \
-kadmin.local -q "ktadd -k /root/es.keytab HTTP/es@$REALM_NAME" && \
+RUN kadmin.local -q "addprinc -pw changeme HTTP/localhost@$REALM_NAME" && \
+kadmin.local -q "ktadd -k /root/es.keytab HTTP/localhost@$REALM_NAME" && \
 kadmin.local -q "addprinc -pw changeme dev@$REALM_NAME" && \
 kadmin.local -q "ktadd -k /root/dev.keytab dev@$REALM_NAME"
 

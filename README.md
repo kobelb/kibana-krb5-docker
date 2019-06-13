@@ -2,8 +2,6 @@
 --------
 ```
 127.0.0.1	kerberos.test.elastic.co
-127.0.0.1	es
-127.0.0.1	kibana
 ```
 
 /etc/krb5.conf
@@ -39,8 +37,8 @@ docker rm kdc
 Generate those keytabs
 --------
 ```
-docker exec kdc kadmin.local -q "addprinc -pw changeme HTTP/es@TEST.ELASTIC.CO"
-docker exec kdc kadmin.local -q "ktadd -k /root/es.keytab HTTP/es@TEST.ELASTIC.CO"
+docker exec kdc kadmin.local -q "addprinc -pw changeme HTTP/localhost@TEST.ELASTIC.CO"
+docker exec kdc kadmin.local -q "ktadd -k /root/es.keytab HTTP/localhost@TEST.ELASTIC.CO"
 docker cp kdc:/root/es.keytab ./
 
 docker exec kdc kadmin.local -q "addprinc -pw changeme dev@TEST.ELASTIC.CO"
