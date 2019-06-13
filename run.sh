@@ -13,7 +13,7 @@ docker cp kdc:/root/es.keytab ./
 docker cp kdc:/root/dev.keytab ./
 
 # Get the ticket-granting-ticket for the dev user
-kinit -k -t ./dev.keytab dev
+kinit -k -t ./dev.keytab dev@TEST.ELASTIC.CO 
 
 # Start up Elaticsearch
 cd $GIT_HOME/kibana
